@@ -1,0 +1,25 @@
+ .hero {
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1508514177221-188e1e464588?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+     background-size: cover;
+     background-position: center;
+    } 
+    .calculator {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+     }
+     .calculator:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    .benefit-card {
+        transition: all 0.3s ease;
+    }
+    .benefit-card:hover {
+        transform: translateY(-10px);
+     }
+     .map-container {
+        height: 400px;
+        background-image: url('https://images.unsplash.com/photo-1586449480552-33ae58ff2a0e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+        background-size: cover;
+        background-position: center;
+        }
