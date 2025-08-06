@@ -47,4 +47,46 @@
     }
 }
 });
+        // Coordenadas de la región del Caribe colombiano
+        const CARIBE_COLOMBIANO = [10.5, -74.5];
+        const ZOOM_LEVEL = 7;
+
+        // Inicializa el mapa en el contenedor con ID 'mapa'
+        let mapa = L.map('mapa').setView(CARIBE_COLOMBIANO, ZOOM_LEVEL);
+
+        // Añade la capa de mapa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mapa);
+
+        // Añade la capa de datos de temperatura (ejemplo con OpenWeatherMap)
+        // NOTA: Debes obtener tu propia API Key de OpenWeatherMap
+        // Puedes obtenerla en: https://home.openweathermap.org/api_keys
+        const API_KEY = 'TU_API_KEY_AQUI'; // Reemplaza esto con tu clave API
+        const tempLayer = L.tileLayer(`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${API_KEY}`, {
+            attribution: 'Datos de temperatura &copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+        });
+
+        // Añade la capa de datos de viento (ejemplo con OpenWeatherMap)
+        const windLayer = L.tileLayer(`https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${API_KEY}`, {
+            attribution: 'Datos de viento &copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+        });
+
+        // Control de capas para activar/desactivar las capas
+        const overlayMaps = {
+            "Temperatura": tempLayer,
+            "Viento": windLayer
+        };
+
+        // Añade el control de capas al mapa
+        L.control.layers(null, overlayMaps).addTo(mapa);
+
+        // JavaScript para el menú móvil
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
 });

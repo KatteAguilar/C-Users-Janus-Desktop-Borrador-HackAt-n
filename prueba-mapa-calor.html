@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energías Renovables en la Región Caribe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="Borrador1.css">
+    
+
+</head>
+<body class="font-sans bg-gray-50">
+    <header class="bg-green-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-solar-panel text-2xl text-yellow-300"></i>
+                <h1 class="text-xl md:text-2xl font-bold">Energía Caribe</h1>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#inicio" class="hover:text-yellow-300 transition">Inicio</a></li>
+                    <li><a href="#recursos" class="hover:text-yellow-300 transition">Recursos</a></li>
+                    <li><a href="#beneficios" class="hover:text-yellow-300 transition">Beneficios</a></li>
+                    <li><a href="#calculadora" class="hover:text-yellow-300 transition">Simulador Fotovoltaico</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-2xl" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="md:hidden hidden bg-green-700 py-2" id="mobile-menu">
+            <ul class="flex flex-col items-center space-y-3">
+                <li><a href="#inicio" class="hover:text-yellow-300 transition">Inicio</a></li>
+                <li><a href="#recursos" class="hover:text-yellow-300 transition">Recursos</a></li>
+                <li><a href="#beneficios" class="hover:text-yellow-300 transition">Beneficios</a></li>
+                <li><a href="#calculadora" class="hover:text-yellow-300 transition">Simulador Fotovoltaico</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero text-white py-20 md:py-32 flex items-center">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Potencial Renovable del Caribe</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Descubre cómo el caribe lidera la transición energética con su extraordinario potencial solar y eólico</p>
+            <a href="#calculadora" class="bg-yellow-400 hover:bg-yellow-300 text-green-900 font-bold py-3 px-6 rounded-full text-lg transition duration-300 inline-block">
+                Simula tu ahorro Energético<i class="fas fa-calculator ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h2 class="text-3xl font-bold text-green-800 mb-6">El Futuro Energético de la Zona Caribe</h2>
+                    <p class="text-gray-700 mb-4 text-lg">La Guajira, con sus extensas horas de sol y vientos constantes, posee uno de los mayores potenciales para generación de energía renovable en Colombia y toda América Latina.</p>
+                    <p class="text-gray-700 mb-6 text-lg">Esta región podría convertirse en el motor de la transición energética del país, generando empleo, desarrollo tecnológico y beneficios ambientales para las comunidades locales.</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-green-100 p-4 rounded-lg text-center">
+                            <i class="fas fa-sun text-3xl text-yellow-500 mb-2"></i>
+                            <p class="font-bold text-green-800">2.500+ horas</p>
+                            <p class="text-sm">de sol al año</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-lg text-center">
+                            <i class="fas fa-wind text-3xl text-blue-500 mb-2"></i>
+                            <p class="font-bold text-green-800">9 m/s</p>
+                            <p class="text-sm">velocidad media del viento</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="map-container rounded-xl overflow-hidden shadow-xl" id="mapa"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recursos" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Recursos Naturales para Energía Limpia</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-sun text-4xl text-yellow-500 mr-4"></i>
+                        <h3 class="text-2xl font-bold text-green-800">Energía Solar</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">La Guajira tiene una radiación solar promedio de 6 kWh/m² al día, una de las más altas del continente. Esto permite que los paneles solares funcionen con máxima eficiencia durante casi todo el año.</p>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <p class="text-yellow-800 font-semibold"><i class="fas fa-lightbulb mr-2"></i>Dato: Un sistema solar de 5 kW puede generar hasta 800 kWh mensuales en esta región.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-wind text-4xl text-blue-500 mr-4"></i>
+                        <h3 class="text-2xl font-bold text-green-800">Energía Eólica</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Los vientos alisios del noreste proporcionan condiciones excepcionales para generación eólica, especialmente en la Alta Guajira. Actualmente, varios parques eólicos están en operación y desarrollo.</p>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-blue-800 font-semibold"><i class="fas fa-fan mr-2"></i>Dato: El proyecto Jepírachi tiene capacidad para alimentar 15,000 hogares.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-green-700 text-white p-6 rounded-xl shadow-lg">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">Proyectos en Desarrollo</h3>
+                        <p>La Guajira será sede de más de 20 proyectos eólicos y solares en los próximos 5 años, con inversiones superiores a $2 billones de pesos, generando miles de empleos locales.</p>
+                    </div>
+                    <div class="md:w-1/3 text-center">
+                        <a href="#" class="bg-yellow-400 hover:bg-yellow-300 text-green-900 font-bold py-2 px-6 rounded-full inline-block transition">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Beneficios para la Comunidad</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="benefit-card bg-green-50 p-6 rounded-xl shadow-md border-l-4 border-green-600">
+                    <i class="fas fa-bolt text-3xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-green-800 mb-3">Acceso a Energía</h3>
+                    <p class="text-gray-700">Llevar electricidad a zonas rurales aisladas, mejorando calidad de vida y oportunidades educativas.</p>
+                </div>
+                
+                <div class="benefit-card bg-blue-50 p-6 rounded-xl shadow-md border-l-4 border-blue-600">
+                    <i class="fas fa-briefcase text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-blue-800 mb-3">Empleo Local</h3>
+                    <p class="text-gray-700">Creación de puestos de trabajo en instalación, mantenimiento y operación de sistemas renovables.</p>
+                </div>
+                
+                <div class="benefit-card bg-yellow-50 p-6 rounded-xl shadow-md border-l-4 border-yellow-600">
+                    <i class="fas fa-hand-holding-usd text-3xl text-yellow-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-yellow-800 mb-3">Ahorro Económico</h3>
+                    <p class="text-gray-700">Reducción de costos energéticos para familias y negocios mediante sistemas distribuidos.</p>
+                </div>
+                
+                <div class="benefit-card bg-purple-50 p-6 rounded-xl shadow-md border-l-4 border-purple-600">
+                    <i class="fas fa-graduation-cap text-3xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-purple-800 mb-3">Capacitación</h3>
+                    <p class="text-gray-700">Programas de formación técnica en energías renovables para jóvenes y adultos.</p>
+                </div>
+                
+                <div class="benefit-card bg-red-50 p-6 rounded-xl shadow-md border-l-4 border-red-600">
+                    <i class="fas fa-leaf text-3xl text-red-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-red-800 mb-3">Medio Ambiente</h3>
+                    <p class="text-gray-700">Reducción de emisiones y protección del ecosistema local al evitar combustibles fósiles.</p>
+                </div>
+                
+                <div class="benefit-card bg-indigo-50 p-6 rounded-xl shadow-md border-l-4 border-indigo-600">
+                    <i class="fas fa-home text-3xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-3">Autonomía Energética</h3>
+                    <p class="text-gray-700">Comunidades independientes de la red eléctrica nacional con sistemas propios renovables.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculadora" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-green-800 mb-6">Simulador Fotovoltaico</h2>
+            <p class="text-center text-gray-700 max-w-2xl mx-auto mb-12">Descubre cuánto podrías ahorrar instalando paneles solares en tu hogar o negocio en la región caribe.</p>
+            
+            <div class="calculator max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="consumo" class="block text-gray-700 font-medium mb-2">Consumo mensual (kWh)</label>
+                        <input type="number" id="consumo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Ej: 300">
+                    </div>
+                    <div>
+                        <label for="tarifa" class="block text-gray-700 font-medium mb-2">Tarifa actual ($/kWh)</label>
+                        <input type="number" id="tarifa" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Ej: 800">
+                    </div>
+                    <div>
+                        <label for="horas" class="block text-gray-700 font-medium mb-2">Horas de sol diarias</label>
+                        <select id="horas" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <option value="4.5">Zonas del Caribe (4.5 horas)</option>
+                            <option value="4">Región Andina (4 horas)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="eficiencia" class="block text-gray-700 font-medium mb-2">Eficiencia del sistema</label>
+                        <select id="eficiencia" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <option value="0.75">Estándar (75%)</option>
+                            <option value="0.85">Alta (85%)</option>
+                            <option value="0.65">Baja (65%)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="calcular" class="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                    Calcular Ahorro <i class="fas fa-calculator ml-2"></i>
+                </button>
+                
+                <div id="resultado" class="mt-8 hidden">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h3 class="text-xl font-bold text-green-800 mb-4">Resultados del Cálculo</h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Tamaño del sistema</p>
+                                <p id="tamano-sistema" class="text-2xl font-bold text-green-700">0 kW</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Ahorro mensual</p>
+                                <p id="ahorro-mensual" class="text-2xl font-bold text-green-700">$0</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Retorno de inversión</p>
+                                <p id="retorno" class="text-2xl font-bold text-green-700">0 años</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-700">
+                            <p><i class="fas fa-info-circle mr-2 text-green-600"></i> Basado en un costo promedio de $3.5 millones por kW instalado en La Guajira.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-green-800 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Voces de la Comunidad</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-green-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="María" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">María Iguarán</h4>
+                            <p class="text-green-200 text-sm">Maestra, Uribia</p>
+                        </div>
+                    </div>
+                    <p class="italic">"Desde que instalaron los paneles solares en nuestra escuela, los niños pueden usar computadores y tener clases hasta en la tarde. Ha cambiado completamente nuestra educación."</p>
+                </div>
+                
+                <div class="bg-green-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="José" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">José Daza</h4>
+                            <p class="text-green-200 text-sm">Pequeño empresario, Riohacha</p>
+                        </div>
+                    </div>
+                    <p class="italic">"Mi restaurante redujo la factura de luz en un 70% con paneles solares. En dos años habré recuperado la inversión. Es lo mejor que he hecho por mi negocio."</p>
+                </div>
+                
+                <div class="bg-green-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Carmen" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Carmen Pushaina</h4>
+                            <p class="text-green-200 text-sm">Líder comunitaria, Manaure</p>
+                        </div>
+                    </div>
+                    <p class="italic">"Los proyectos eólicos han traído empleo para nuestros jóvenes y recursos para mejorar la comunidad. Es importante que sigamos participando en esta transición energética."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-yellow-400">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-green-900 mb-4">¿Listo para unirte a la revolución renovable?</h2>
+            <p class="text-green-900 mb-6 max-w-2xl mx-auto">Consulta nuestros programas de financiamiento y capacitación para implementar energía solar en tu hogar o comunidad.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#" class="bg-green-800 hover:bg-green-900 text-white font-bold py-3 px-6 rounded-full inline-block transition">
+                    Más información <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#" class="bg-white hover:bg-gray-100 text-green-800 font-bold py-3 px-6 rounded-full inline-block transition">
+                    Contactar asesor <i class="fas fa-phone ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-green-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-solar-panel mr-2 text-yellow-300"></i> Energía Caribe
+                    </h3>
+                    <p class="mb-4">Promoviendo el desarrollo sostenible del caribe a través de las energías renovables.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-yellow-300"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Enlaces</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-yellow-300 transition">Inicio</a></li>
+                        <li><a href="#recursos" class="hover:text-yellow-300 transition">Recursos Naturales</a></li>
+                        <li><a href="#beneficios" class="hover:text-yellow-300 transition">Beneficios</a></li>
+                        <li><a href="#calculadora" class="hover:text-yellow-300 transition">Simulador Solar</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-yellow-300"></i> Valledupar, Cesar</li>
+                        <li class="flex items-center"><i class="fas fa-phone mr-2 text-yellow-300"></i> +57 123 456 7890</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 text-yellow-300"></i> info@energiacaribe.org</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Boletín informativo</h4>
+                    <p class="mb-4">Suscríbete para recibir noticias sobre energías renovables en la región.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Tu correo" class="px-4 py-2 w-full rounded-l-lg text-gray-900">
+                        <button class="bg-yellow-400 hover:bg-yellow-300 text-green-900 px-4 rounded-r-lg"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-6 border-t border-green-800 text-center text-sm text-green-300">
+                <p>© 2023 Energía Caribe. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="Borrador.js"></script>
+</body>
+</html>
